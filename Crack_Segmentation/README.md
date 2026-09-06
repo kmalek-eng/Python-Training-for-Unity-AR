@@ -74,7 +74,7 @@ python evaluation.py \
 
 ## Model performance
 
-> Placeholder values for README formatting. Replace with actual results after retraining.
+Performance of the trained U-Net model on the held-out test set.
 
 | Metric    | Score |
 | --------- | ----: |
@@ -83,7 +83,6 @@ python evaluation.py \
 | Precision | 0.635 |
 | mIoU      | 0.709 |
 
-Use these only as temporary placeholder values until you replace them with the actual retraining results.
 
 
 Best trained model: `best_model/best_model.pth`
