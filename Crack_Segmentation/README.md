@@ -1,8 +1,8 @@
 # Crack Segmentation Training
 
-This folder contains a U-Net based crack segmentation pipeline.
+This folder contains a U-Net-based crack segmentation pipeline.
 
-Run all commands from inside Training/Crack_Segmentation so the relative paths work correctly.
+Run all commands from inside Training/Crack_Segmentation, so the relative paths work correctly.
 
 ## Files
 
@@ -16,7 +16,7 @@ dataset.py, metrics.py, evaluation.py: support files for dataset loading, metric
 
 ## Dataset
 
-This project uses the [Concrete Crack Conglomerate Dataset](https://data.lib.vt.edu/articles/dataset/Concrete_Crack_Conglomerate_Dataset/16625056), created by Eric Bianchi and Matthew Hebdon at Virginia Tech. The original dataset combines several public concrete-crack datasets, including CFD, Crack500, CrackTree200, DeepCrack, GAPs, Rissbilder, non-crack images, and Volker.
+This project uses the [Concrete Crack Conglomerate Dataset](https://www.kaggle.com/datasets/aravindnagarajan/crack-segmentation-dataset/data), created by Eric Bianchi and Matthew Hebdon at Virginia Tech. The original dataset combines several public concrete-crack datasets, including CFD, Crack500, CrackTree200, DeepCrack, GAPs, Rissbilder, non-crack images, and Volker.
 
 The dataset itself is not included in this repository.
 
@@ -78,10 +78,10 @@ python evaluation.py \
 
 | Metric    | Score |
 | --------- | ----: |
-| F1 Score  | 0.860 |
-| Recall    | 0.840 |
-| Precision | 0.880 |
-| mIoU      | 0.890 |
+| F1 Score  | 0.642 |
+| Recall    | 0.579 |
+| Precision | 0.635 |
+| mIoU      | 0.709 |
 
 Use these only as temporary placeholder values until you replace them with the actual retraining results.
 
