@@ -70,7 +70,7 @@ python evaluation.py \
   --test-image-dir dataset/test_images \
   --test-mask-dir dataset/test_masks \
   --checkpoint-path checkpoints/fold_1/best_model.pth \
-  --device cpu```;
+  --device cpu```
 
 ## Model performance
 
