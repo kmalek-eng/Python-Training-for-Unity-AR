@@ -52,8 +52,8 @@ def compute_batch_f1(y_true, y_pred, eps=1e-8):
     fp = np.sum((1.0 - y_true) * y_pred)
     fn = np.sum(y_true * (1.0 - y_pred))
 
-    precision = tp / max(tp + fp, eps)
-    recall = tp / max(tp + fn, eps)
+    precision = (tp + eps) / (tp + fp + eps)
+    recall = (tp + eps) / (tp + fn + eps)
     f1 = 2.0 * precision * recall / max(precision + recall, eps)
 
     return float(f1)
@@ -98,6 +98,7 @@ def evaluate_model(model, dataloader, device, threshold, results_dir):
     total_precision = 0.0
     total_iou = 0.0
     total_batches = 0
+    total_images = 0
     image_counter = 0
 
     for images, masks in dataloader:
@@ -110,22 +111,29 @@ def evaluate_model(model, dataloader, device, threshold, results_dir):
 
         image_counter = save_predictions(predictions, results_dir, image_counter)
 
-        y_true = masks.cpu().numpy().astype(np.uint8).flatten()
-        y_pred = predictions.cpu().numpy().astype(np.uint8).flatten()
+        masks_np = masks.cpu().numpy().astype(np.uint8)
+        preds_np = predictions.cpu().numpy().astype(np.uint8)
 
-        batch_f1 = compute_batch_f1(y_true, y_pred)
+        for i in range(masks_np.shape[0]):
+            y_true_i = masks_np[i].flatten()
+            y_pred_i = preds_np[i].flatten()
+            total_f1 += compute_batch_f1(y_true_i, y_pred_i)
+
+        total_images += masks_np.shape[0]
+
+        y_true = masks_np.flatten()
+        y_pred = preds_np.flatten()
         batch_recall = recall_score(y_true, y_pred, zero_division=0)
         batch_precision = precision_score(y_true, y_pred, zero_division=0)
         batch_iou = compute_batch_iou(y_true, y_pred)
 
-        total_f1 += batch_f1
         total_recall += batch_recall
         total_precision += batch_precision
         total_iou += batch_iou
         total_batches += 1
 
     return {
-        "f1": total_f1 / total_batches,
+        "f1": total_f1 / total_images,
         "recall": total_recall / total_batches,
         "precision": total_precision / total_batches,
         "miou": total_iou / total_batches,
