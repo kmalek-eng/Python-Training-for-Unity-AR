@@ -79,10 +79,10 @@ Performance of the trained U-Net model on the held-out test set.
 
 | Metric    | Score |
 | --------- | ----: |
-| F1 Score  | 0.642 |
-| Recall    | 0.579 |
-| Precision | 0.635 |
-| mIoU      | 0.709 |
+| F1 Score  | 0.7030 |
+| Recall    | 0.7100 |
+| Precision | 0.6067 |
+| mIoU      | 0.7414 |
 
 
 
