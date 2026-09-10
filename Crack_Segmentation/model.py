@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
+
 class UNET_MODEL(nn.Module):
     def __init__(self, args=None, channel_reduction=2):
         super().__init__()
@@ -24,7 +25,6 @@ class UNET_MODEL(nn.Module):
         self.bn2 = nn.BatchNorm2d(c2)
         self.conv2b = nn.Conv2d(c2, c2, 3, padding=1)
         self.bn2b = nn.BatchNorm2d(c2)
-
         self.pool = nn.MaxPool2d(2, 2)
 
         self.conv3 = nn.Conv2d(c2, c3, 3, padding=1)
@@ -55,7 +55,6 @@ class UNET_MODEL(nn.Module):
         self.bn10 = nn.BatchNorm2d(c6)
         self.conv11 = nn.Conv2d(c6, c6, 3, padding=1)
         self.bn11 = nn.BatchNorm2d(c6)
-
         self.dropout = nn.Dropout2d(0.2)
 
         # -------- Decoder --------
@@ -82,9 +81,9 @@ class UNET_MODEL(nn.Module):
         self.bn18 = nn.BatchNorm2d(c2)
         self.conv19 = nn.Conv2d(c2, c2, 3, padding=1)
         self.bn19 = nn.BatchNorm2d(c2)
-
         self.out = nn.Conv2d(c2, 1, 1)
 
+    
     def forward(self, x):
         # -------- SAFE SIZE CHECK --------
         h, w = x.shape[2], x.shape[3]
@@ -139,4 +138,5 @@ class UNET_MODEL(nn.Module):
         d4 = F.relu(self.bn18(self.conv18(d4)))
         d4 = F.relu(self.bn19(self.conv19(d4)))
 
+        
         return self.out(d4)
