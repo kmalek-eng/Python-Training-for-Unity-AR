@@ -100,6 +100,7 @@ python evaluation.py \
   --device cpu
 ```
 
+## Model performance
 
 The U-Net model was evaluated across four folds. For each fold, the probability threshold was selected using the validation set and then applied to the corresponding test set.
 
