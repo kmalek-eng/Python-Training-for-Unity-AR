@@ -118,9 +118,9 @@ The table below provides context against published crack-segmentation models eva
 
 | Model | Precision | Recall | F1-score | Reference |
 |---|---:|---:|---:|---|
-| **U-Net (this work, 4-fold average)** | 61.99% | 70.09% | 70.58% | This work |
+| **U-Net (this work, 4-fold average)** | 61.99% | **70.09% **| **70.58%** | This work |
 | Lee et al. U-Net (mean of 4 reported runs) | 32.18% | 62.03% | 39.98% | Lee et al., *Applied Sciences*, 2023, 13(4), 2367. [DOI](https://doi.org/10.3390/app13042367) |
-| Dmg2Former (112×112) | 72.19% | 68.86% | 70.49% | Eltouny et al., *Sensors*, 2024, 24(18), 6007. [DOI](https://doi.org/10.3390/s24186007) |
+| Dmg2Former (112×112) | **72.19%** | 68.86% | 70.49% | Eltouny et al., *Sensors*, 2024, 24(18), 6007. [DOI](https://doi.org/10.3390/s24186007) |
 | Dmg2Former-NN (112→224) | 70.18% | 68.41% | 69.29% | Eltouny et al., *Sensors*, 2024, 24(18), 6007. |
 | Dmg2Former-NN (112→448) | 69.26% | 67.18% | 68.20% | Eltouny et al., *Sensors*, 2024, 24(18), 6007. |
 
