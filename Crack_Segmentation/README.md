@@ -100,17 +100,30 @@ python evaluation.py \
   --device cpu
 ```
 
-## Model performance
 
-Performance of the trained U-Net model on the held-out test set using a threshold of `0.30`.
+The U-Net model was evaluated across four folds. For each fold, the probability threshold was selected using the validation set and then applied to the corresponding test set.
 
-| Metric    |  Score |
-| --------- | -----: |
-| F1 Score  | 0.7030 |
-| Recall    | 0.7100 |
-| Precision | 0.6067 |
-| mIoU      | 0.7414 |
+| Fold | Threshold | Precision | Recall | F1-score | mIoU |
+|---|---:|---:|---:|---:|---:|
+| Fold 1 | 0.30 | 60.67% | 71.00% | 70.30% | 74.14% |
+| Fold 2 | 0.35 | 61.23% | 70.71% | 70.46% | 74.29% |
+| Fold 3 | 0.35 | 63.68% | 68.29% | 70.66% | 74.55% |
+| Fold 4 | 0.35 | 62.38% | 70.35% | 70.88% | 74.58% |
+| **Average** |  | **61.99%** | **70.09%** | **70.58%** | **74.39%** |
 
+### Comparison with published models
+
+The table below provides context against published crack-segmentation models evaluated on the same dataset. Because data splits and evaluation procedures differ across studies, these values should be treated as a reference comparison rather than a controlled benchmark.
+
+| Model | Precision | Recall | F1-score | Reference |
+|---|---:|---:|---:|---|
+| **U-Net (this work, 4-fold average)** | 61.99% | 70.09% | 70.58% | This work |
+| Lee et al. U-Net (mean of 4 reported runs) | 32.18% | 62.03% | 39.98% | Lee et al., *Applied Sciences*, 2023, 13(4), 2367. [DOI](https://doi.org/10.3390/app13042367) |
+| Dmg2Former (112×112) | 72.19% | 68.86% | 70.49% | Eltouny et al., *Sensors*, 2024, 24(18), 6007. [DOI](https://doi.org/10.3390/s24186007) |
+| Dmg2Former-NN (112→224) | 70.18% | 68.41% | 69.29% | Eltouny et al., *Sensors*, 2024, 24(18), 6007. |
+| Dmg2Former-NN (112→448) | 69.26% | 67.18% | 68.20% | Eltouny et al., *Sensors*, 2024, 24(18), 6007. |
+
+The Dmg2Former values correspond to the reported average crack-segmentation test metrics grouped by output image size using randomly initialized models without pretrained weights. The Lee et al. U-Net values are the arithmetic mean of the four U-Net runs reported in their Table 1.
 Best Fold # checkpoint saved during training: `checkpoints/fold_#/best_model.pth`
 
-Best model manually selected and placed in the repository: `best_model/best_model.pth`
+Representative Fold 1 model manually selected and included in the repository: `best_model/best_model.pth`. The remaining fold models are omitted because they exceed GitHub’s file-size limit and produced very similar test performance.
